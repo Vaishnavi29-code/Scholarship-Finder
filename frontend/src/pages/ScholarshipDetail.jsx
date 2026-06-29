@@ -7,6 +7,8 @@ function ScholarshipDetail() {
   const [checklist, setChecklist] = useState(null)
   const [checked, setChecked] = useState({})
   const [loadingChecklist, setLoadingChecklist] = useState(true)
+  const [guide, setGuide] = useState(null)
+  const [loadingGuide, setLoadingGuide] = useState(true)
 
   useEffect(() => {
     // fetch scholarship details
@@ -23,6 +25,13 @@ function ScholarshipDetail() {
         // load saved checkboxes from localStorage
         const saved = localStorage.getItem(`checklist-${id}`)
         if (saved) setChecked(JSON.parse(saved))
+      })
+    // fetch application guide
+    fetch(`http://localhost:5000/api/guide/${id}`)
+      .then(res => res.json())
+      .then(data => {
+        setGuide(data)
+        setLoadingGuide(false)
       })
   }, [id])
 
@@ -143,6 +152,47 @@ function ScholarshipDetail() {
             </ul>
           </div>
         )}
+        {/* Application Guide */}
+        <div className="bg-white rounded-2xl p-8 shadow-sm mb-6 mt-6">
+          <h2 className="text-xl font-bold text-gray-800 mb-2">📖 How to Apply</h2>
+          
+          {guide?.estimatedTime && (
+            <p className="text-gray-500 text-sm mb-6">⏱️ Estimated time: {guide.estimatedTime}</p>
+          )}
+
+          {loadingGuide ? (
+            <div className="flex items-center gap-3 text-gray-500">
+              <div className="w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+              <p>🤖 AI is generating your application guide...</p>
+            </div>
+          ) : guide?.steps ? (
+            <div className="flex flex-col gap-4">
+              {guide.steps.map((step, index) => (
+                <div key={index} className="flex gap-4">
+                  <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">
+                    {step.stepNumber}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-bold text-gray-800 mb-1">
+                      {step.title}
+                      {step.important && <span className="ml-2 text-xs text-orange-500 font-normal">⚠️ important</span>}
+                    </h3>
+                    <p className="text-gray-600 text-sm">{step.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-gray-500">Could not generate guide. Please try again.</p>
+          )}
+
+          {/* Important Note */}
+          {guide?.importantNote && (
+            <div className="bg-orange-50 border border-orange-200 rounded-xl p-4 mt-6">
+              <p className="text-orange-700 text-sm font-medium">⚠️ Important: {guide.importantNote}</p>
+            </div>
+          )}
+        </div>
 
       </div>
     </div>
