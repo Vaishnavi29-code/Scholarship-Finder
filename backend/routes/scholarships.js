@@ -66,5 +66,13 @@ router.get('/', async (req, res) => {
     res.json({ error: error.message })
   }
 })
+router.get('/:id', async (req, res) => {
+  try {
+    const scholarship = await Scholarship.findById(req.params.id)
+    res.json(scholarship)
+  } catch (error) {
+    res.json({ error: error.message })
+  }
+})
 
 module.exports = router

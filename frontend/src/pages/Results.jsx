@@ -252,6 +252,31 @@ function Results() {
     return 'bg-red-100 text-red-700'
   }
 
+  const saveScholarship = async (scholarship) => {
+  const profileId = localStorage.getItem('profileId')
+  if (!profileId) return alert('Please fill your profile first!')
+
+  try {
+    const response = await fetch('http://localhost:5000/api/saved', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        profileId,
+        scholarshipId: scholarship._id,
+        scholarshipName: scholarship.name,
+        deadline: scholarship.deadline,
+        amount: scholarship.amount,
+        applyLink: scholarship.applyLink,
+        provider: scholarship.provider
+      })
+    })
+    const data = await response.json()
+    alert(data.message)
+  } catch (error) {
+    alert('Something went wrong!')
+  }
+}
+
   if (loading) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center gap-4">
@@ -302,7 +327,9 @@ function Results() {
               {/* Top Row */}
               <div className="flex justify-between items-start mb-3">
                 <div>
-                  <h2 className="text-xl font-bold text-gray-800">{s.name}</h2>
+                  <a href={`/scholarship/${s._id}`} className="hover:text-blue-600">
+                    <h2 className="text-xl font-bold text-gray-800 hover:text-blue-600 cursor-pointer underline">{s.name}</h2>
+                  </a>
                   <p className="text-gray-500 text-sm mt-1">{s.provider}</p>
                 </div>
                 <div className="flex flex-col items-end gap-2">
@@ -341,11 +368,23 @@ function Results() {
                   ))}
                   <span className="bg-purple-50 text-purple-600 text-xs px-3 py-1 rounded-full">{s.eligibility?.gender}</span>
                 </div>
-                <a href={s.applyLink} target="_blank" rel="noreferrer">
-                  <button className="bg-blue-600 text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition">
-                    Apply Now →
+                <div className="flex gap-2">
+                  <a href={`/scholarship/${s._id}`}>
+                    <button className="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition">
+                      View Details
+                    </button>
+                  </a>
+                  <button
+                    onClick={() => saveScholarship(s)}
+                    className="bg-white border border-blue-600 text-blue-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-50 transition">
+                    🔖 Save
                   </button>
-                </a>
+                  <a href={s.applyLink} target="_blank" rel="noreferrer">
+                    <button className="bg-blue-600 text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition">
+                      Apply Now →
+                    </button>
+                  </a>
+                </div>
               </div>
 
             </div>
