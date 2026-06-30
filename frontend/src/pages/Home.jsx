@@ -4,7 +4,7 @@ function Home() {
 
       {/* Hero Section */}
       <div className="bg-blue-600 text-white py-20 px-6 text-center">
-        <h1 className="text-4xl font-bold mb-4">
+        <h1 className="text-3xl md:text-4xl font-bold mb-4">
           Find Scholarships Made for You
         </h1>
         <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
@@ -18,7 +18,7 @@ function Home() {
       </div>
 
       {/* Stats Section */}
-      <div className="grid grid-cols-3 gap-6 max-w-3xl mx-auto py-12 px-6 text-center">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto py-12 px-6 text-center">
         <div>
           <div className="text-3xl font-bold text-blue-600">500+</div>
           <div className="text-gray-600 mt-1">Scholarships Listed</div>
@@ -38,7 +38,7 @@ function Home() {
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-10">
           Why ScholarshipFinder 2.0?
         </h2>
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white p-6 rounded-xl shadow-sm text-center">
             <div className="text-3xl mb-3">🤖</div>
             <h3 className="font-bold text-gray-800 mb-2">AI Matching</h3>

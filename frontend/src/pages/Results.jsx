@@ -333,7 +333,7 @@ function Results() {
             <div key={s._id} className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
 
               {/* Top Row */}
-              <div className="flex justify-between items-start mb-3">
+              <div className="flex flex-col md:flex-row md:justify-between items-start mb-3 gap-2">
                 <div>
                   <a href={`/scholarship/${s._id}`} className="hover:text-blue-600">
                     <h2 className="text-xl font-bold text-gray-800 hover:text-blue-600 cursor-pointer underline">{s.name}</h2>
@@ -369,14 +369,14 @@ function Results() {
               </div>
 
               {/* Bottom Row */}
-              <div className="flex justify-between items-center">
+              <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-3">
                 <div className="flex gap-2 flex-wrap">
                   {s.eligibility?.categories.map((cat) => (
                     <span key={cat} className="bg-blue-50 text-blue-600 text-xs px-3 py-1 rounded-full">{cat}</span>
                   ))}
                   <span className="bg-purple-50 text-purple-600 text-xs px-3 py-1 rounded-full">{s.eligibility?.gender}</span>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                   <a href={`/scholarship/${s._id}`}>
                     <button className="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition">
                       View Details
