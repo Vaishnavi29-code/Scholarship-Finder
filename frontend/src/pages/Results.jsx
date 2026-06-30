@@ -293,7 +293,7 @@ function Results() {
       <div className="max-w-4xl mx-auto">
 
         {/* Header */}
-        <div className="mb-8 flex justify-between items-center">
+        <div className="mb-4 flex justify-between items-center">
           <div>
             <h1 className="text-3xl font-bold text-gray-800">Scholarships For You</h1>
             <p className="text-gray-500 mt-1">{scholarships.length} scholarships matched based on your profile</p>
@@ -303,6 +303,14 @@ function Results() {
               🤖 AI Matched
             </div>
           )}
+        </div>
+
+        {/* Disclaimer */}
+        <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-8 flex items-start gap-2">
+          <span className="text-amber-500">⚠️</span>
+          <p className="text-amber-700 text-sm">
+            Deadlines and details are curated for demo purposes and may not reflect live updates. Always verify on the official scholarship portal before applying.
+          </p>
         </div>
 
         {/* No results */}
