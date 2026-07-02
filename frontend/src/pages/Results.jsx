@@ -5,7 +5,7 @@
 // //   const [loading, setLoading] = useState(true)
 
 // //   useEffect(() => {
-// //     fetch('http://localhost:5000/api/scholarships')
+// //     fetch('https://scholarship-finder-7kcy.onrender.com/api/scholarships')
 // //       .then(res => res.json())
 // //       .then(data => {
 // //         setScholarships(data)
@@ -93,8 +93,8 @@
 //   useEffect(() => {
 //     const profileId = localStorage.getItem('profileId')
 //     const url = profileId
-//       ? `http://localhost:5000/api/scholarships?profileId=${profileId}`
-//       : 'http://localhost:5000/api/scholarships'
+//       ? `https://scholarship-finder-7kcy.onrender.com/api/scholarships?profileId=${profileId}`
+//       : 'https://scholarship-finder-7kcy.onrender.com/api/scholarships'
 
 //     fetch(url)
 //       .then(res => res.json())
@@ -214,7 +214,7 @@ function Results() {
     if (profileId) {
       // use AI matching
       setUsingAI(true)
-      fetch('http://localhost:5000/api/ai-match', {
+      fetch('https://scholarship-finder-7kcy.onrender.com/api/ai-match', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ profileId })
@@ -223,7 +223,7 @@ function Results() {
         .then(data => {
           if (data.error) {
             // fallback to basic filter
-            return fetch(`http://localhost:5000/api/scholarships?profileId=${profileId}`)
+            return fetch(`https://scholarship-finder-7kcy.onrender.com/api/scholarships?profileId=${profileId}`)
               .then(res => res.json())
           }
           return data
@@ -237,7 +237,7 @@ function Results() {
           setLoading(false)
         })
     } else {
-      fetch('http://localhost:5000/api/scholarships')
+      fetch('https://scholarship-finder-7kcy.onrender.com/api/scholarships')
         .then(res => res.json())
         .then(data => {
           setScholarships(data)
@@ -257,7 +257,7 @@ function Results() {
   if (!profileId) return alert('Please fill your profile first!')
 
   try {
-    const response = await fetch('http://localhost:5000/api/saved', {
+    const response = await fetch('https://scholarship-finder-7kcy.onrender.com/api/saved', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

@@ -11,7 +11,7 @@ function Deadlines() {
       setLoading(false)
       return
     }
-    fetch(`http://localhost:5000/api/saved/${profileId}`)
+    fetch(`https://scholarship-finder-7kcy.onrender.com/api/saved/${profileId}`)
       .then(res => res.json())
       .then(data => {
         setSaved(data)
@@ -41,7 +41,7 @@ function Deadlines() {
   }
 
   const removeScholarship = async (id) => {
-    await fetch(`http://localhost:5000/api/saved/${id}`, { method: 'DELETE' })
+    await fetch(`https://scholarship-finder-7kcy.onrender.com/api/saved/${id}`, { method: 'DELETE' })
     setSaved(saved.filter(s => s._id !== id))
   }
 

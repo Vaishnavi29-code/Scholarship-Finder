@@ -12,12 +12,12 @@ function ScholarshipDetail() {
 
   useEffect(() => {
     // fetch scholarship details
-    fetch(`http://localhost:5000/api/scholarships/${id}`)
+    fetch(`https://scholarship-finder-7kcy.onrender.com/api/scholarships/${id}`)
       .then(res => res.json())
       .then(data => setScholarship(data))
 
     // fetch AI checklist
-    fetch(`http://localhost:5000/api/checklist/${id}`)
+    fetch(`https://scholarship-finder-7kcy.onrender.com/api/checklist/${id}`)
       .then(res => res.json())
       .then(data => {
         setChecklist(data)
@@ -27,7 +27,7 @@ function ScholarshipDetail() {
         if (saved) setChecked(JSON.parse(saved))
       })
     // fetch application guide
-    fetch(`http://localhost:5000/api/guide/${id}`)
+    fetch(`https://scholarship-finder-7kcy.onrender.com/api/guide/${id}`)
       .then(res => res.json())
       .then(data => {
         setGuide(data)
